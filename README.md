@@ -4,8 +4,6 @@ A private, browser-based stress-relief game for study pressure, overthinking, an
 
 > MindReset is for relaxation and self-reflection. It is **not** a replacement for professional mental-health care. You can skip any exercise that doesn't feel right. If you feel unsafe or in crisis, contact your local emergency number or a crisis line in your country.
 
-**Live version:** https://claude.ai/artifact/V8PZdGDShb3jUoAchjqjAv
-
 ---
 
 ## The five modes
