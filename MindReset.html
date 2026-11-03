@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#141a33">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="MindReset">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" id="ti" href="">
+<link rel="icon" id="fi" href="">
+<title>MindReset</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef3ee;--card:#fbfdfb;--ink:#1d2b2a;--mute:#5b6b69;--line:#d3dfd7;--moss:#4f9a6a;--amber:#d9962b;--coral:#d4705f;--night:#141a33;--on:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101a1a;--card:#18262a;--ink:#e6efe9;--mute:#9fb3ae;--line:#2a3d40;--moss:#7fc293;--amber:#f2c879;--coral:#ec9585}}
+:root[data-theme="dark"]{--bg:#101a1a;--card:#18262a;--ink:#e6efe9;--mute:#9fb3ae;--line:#2a3d40;--moss:#7fc293;--amber:#f2c879;--coral:#ec9585}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 'DM Sans',system-ui,sans-serif;min-height:100vh;min-height:100dvh;overscroll-behavior-y:none;-webkit-text-size-adjust:100%}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:700;line-height:1.15;margin:0 0 .4em}
+h1{font-size:clamp(2rem,6vw,3rem)}h2{font-size:1.7rem}h3{font-size:1.15rem}
+p{margin:0 0 .8em;max-width:62ch}
+.wrap{max-width:880px;margin:0 auto;padding:20px 18px 60px}
+header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}
+.logo{font:700 1.2rem Fraunces,serif;cursor:pointer;background:none;border:0;color:var(--ink);padding:6px 0}
+button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.hint{background:var(--card);border:1.5px solid var(--amber);border-radius:18px;padding:14px 16px;margin-top:18px}
+.hint p{margin:0 0 .6em}
+.back{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font-size:1.3rem;line-height:1;display:grid;place-items:center}.back[hidden]{display:none}.back:hover{border-color:var(--moss)}
+.btn{background:var(--moss);color:#0c1a12;border:0;border-radius:999px;padding:12px 22px;font-weight:700;min-height:46px}
+.btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn.sm{padding:6px 14px;min-height:36px;font-size:.9rem}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.mode{text-align:left;border:1.5px solid var(--line);background:var(--card);border-radius:22px;padding:18px;color:var(--ink);min-height:150px;position:relative;overflow:hidden}
+.mode:hover{border-color:var(--moss)}
+.mode .e{font-size:2rem;display:block;margin-bottom:6px}
+.mode small{color:var(--mute);display:block}
+.mode:nth-child(1){border-radius:28px 12px 28px 12px}.mode:nth-child(3){border-radius:50px 50px 14px 14px}.mode:nth-child(5){border-radius:12px 28px 12px 28px}
+.note{font-size:.88rem;color:var(--mute);border-top:1px solid var(--line);margin-top:26px;padding-top:14px}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:20px;padding:18px;margin-bottom:14px}
+.chip{border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 16px}
+.chip[aria-pressed="true"]{background:var(--amber);color:#1c1405;border-color:var(--amber)}
+.big{font:700 clamp(3rem,14vw,5.5rem)/1 Fraunces,serif;font-variant-numeric:tabular-nums;margin:10px 0}
+input[type=text]{width:100%;padding:12px 14px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+.stats{color:var(--mute);font-size:.9rem;margin:18px 0 0}
+.flip{width:100%;text-align:left;background:var(--card);border:1.5px dashed var(--line);border-radius:16px;padding:14px;color:var(--ink);margin-bottom:10px}
+.flip[aria-pressed="true"]{border-style:solid;border-color:var(--moss);opacity:.75;text-decoration:line-through}
+.scene{background:linear-gradient(#cfe8e0,#e9f2dc 70%,#9ccc9e 70%);border-radius:24px;padding:10px;overflow:hidden}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .scene{background:linear-gradient(#1e3a4a,#2c4a45 70%,#2f5a42 70%)}}
+.garden{display:flex;align-items:flex-end;gap:6px;min-height:230px;overflow-x:auto;padding:0 6px}
+.plant{flex:0 0 96px;text-align:center}
+.plant svg{display:block;margin:0 auto;transform-origin:50% 100%;animation:sway 5s ease-in-out infinite}
+.plant:nth-child(2n) svg{animation-delay:-2s}
+@keyframes sway{50%{transform:rotate(3deg)}}
+.plant small{display:block;font-size:.72rem;line-height:1.2;color:var(--ink);background:var(--card);border-radius:8px;padding:3px 4px;margin-top:2px;word-break:break-word}
+.orbwrap{display:grid;place-items:center;height:min(68vw,340px);margin:10px 0}
+.orb{width:34%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff9,transparent 40%),radial-gradient(circle,var(--moss),#2f6f8a);box-shadow:0 0 60px 10px #4f9a6a55;display:grid;place-items:center;color:#fff;font:700 1.1rem Fraunces,serif;transform:scale(1);transition:transform 4s ease-in-out}
+.isle{width:100%;max-width:520px;display:block;margin:0 auto}
+.spot{cursor:pointer}.spot:focus-visible circle{stroke:var(--amber);stroke-width:4}
+.night{position:fixed;inset:0;background:var(--night);z-index:20;color:#e9e6ff;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:20px 20px calc(24px + env(safe-area-inset-bottom,0px));text-align:center}
+.night canvas{position:absolute;inset:0;width:100%;height:100%}
+.night>*:not(canvas){position:relative}
+.night .btn.alt{color:#e9e6ff;border-color:#e9e6ff55}
+.fade{animation:fin .5s ease}@keyframes fin{from{opacity:0}}
+.ok{color:var(--moss);font-weight:700}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.calm *{animation:none!important;transition:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="row" style="gap:8px"><button class="back" id="bk" aria-label="Back to home" onclick="go('')" hidden>←</button><button class="logo" onclick="go('')">🌿 MindReset</button></div>
+<div class="row"><button class="btn alt sm" id="snd" aria-pressed="false" onclick="tog('sound')"></button><button class="btn alt sm" id="clm" aria-pressed="false" onclick="tog('calm')"></button></div></header>
+<main id="app" aria-live="polite"></main>
+<p class="note">MindReset is for relaxation and self-reflection. It isn’t a replacement for professional mental-health care, and you can skip any exercise that doesn’t feel right. If you feel unsafe or in crisis, contact your local emergency number or a crisis line in your country. Everything here stays on this device.</p>
+</div>
+<script>
+const $=s=>document.querySelector(s),A=$('#app');
+let S={breaks:0,planted:0,breaths:0,nights:0,garden:[],sound:false,calm:false};
+try{Object.assign(S,JSON.parse(localStorage.getItem('mindreset')||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem('mindreset',JSON.stringify(S))}catch(e){}};
+const esc=t=>t.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let timers=[];let WL;const clr=()=>{try{WL&&WL.release();WL=null}catch(e){}timers.forEach(t=>{clearInterval(t);clearTimeout(t)});timers=[];stopSnd();const n=$('.night');if(n)n.remove()};
+function tog(k){S[k]=!S[k];save();chrome()}
+function chrome(){$('#snd').textContent=S.sound?'🔊 Sound on':'🔇 Sound off';$('#snd').setAttribute('aria-pressed',S.sound);$('#clm').textContent=S.calm?'Motion: still':'Motion: on';$('#clm').setAttribute('aria-pressed',S.calm);document.body.classList.toggle('calm',S.calm);if(!S.sound)stopSnd()}
+const reduce=()=>S.calm||matchMedia('(prefers-reduced-motion:reduce)').matches;
+const mm=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+/* sound: soft brown noise, only after the person turns it on */
+let ac,gn,src;
+function startSnd(){if(!S.sound||src)return;try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const n=ac.sampleRate*4,b=ac.createBuffer(1,n,ac.sampleRate),d=b.getChannelData(0);let l=0;for(let i=0;i<n;i++){l=(l+.02*(Math.random()*2-1))/1.02;d[i]=l*3.5}src=ac.createBufferSource();src.buffer=b;src.loop=true;gn=ac.createGain();gn.gain.value=.5;src.connect(gn).connect(ac.destination);src.start()}catch(e){}}
+function stopSnd(){try{if(src){src.stop();src=null}}catch(e){}}
+function fadeSnd(){try{if(gn)gn.gain.linearRampToValueAtTime(0,ac.currentTime+8)}catch(e){}}
+const V={};
+function go(h){location.hash=h;route()}
+function route(){clr();const h=location.hash.slice(1);$('#bk').hidden=!V[h]||h==='home';(V[h]||V.home)();window.scrollTo(0,0)}
+addEventListener('hashchange',route);
+const hint=()=>{if(S.hint||matchMedia('(display-mode: standalone)').matches||navigator.standalone)return '';const ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);return `<div class="hint"><p><b>Keep MindReset on your home screen</b></p><p>${ios?'In Safari, tap the Share button, then <b>Add to Home Screen</b>.':'In Chrome, tap the ⋮ menu, then <b>Add to Home screen</b> (or <b>Install app</b>).'}</p><button class="btn alt sm" onclick="dh()">Got it</button></div>`};window.dh=()=>{S.hint=1;save();V.home()};
+/* HOME */
+V.home=()=>{A.innerHTML=`<div class="fade"><h1>Take a breath. You’re allowed to pause.</h1><p>Five small games for study pressure, racing thoughts, heavy feelings and restless nights. Pick one. No account, no score to beat.</p>
+<div class="grid">
+<button class="mode" onclick="go('study')"><span class="e">📚</span><h3>Study Escape</h3><small>A timed break, a quick reset, then back when you’re ready.</small></button>
+<button class="mode" onclick="go('garden')"><span class="e">🌱</span><h3>Thought Garden</h3><small>Plant a worry and watch the garden grow.</small></button>
+<button class="mode" onclick="go('breathe')"><span class="e">🌬️</span><h3>Breathing World</h3><small>Follow the orb and slow your breath.</small></button>
+<button class="mode" onclick="go('island')"><span class="e">🏝️</span><h3>Emotion Island</h3><small>Name a feeling, visit a place that helps.</small></button>
+<button class="mode" onclick="go('night')"><span class="e">🌙</span><h3>Night Escape</h3><small>Moonlight, stars and a wind-down timer.</small></button></div>
+${hint()}<p class="stats">So far on this device: ${S.breaks} study breaks · ${S.planted} thoughts planted · ${S.breaths} breathing rounds · ${S.nights} night wind-downs</p></div>`};
+/* STUDY */
+V.study=()=>{let len=S.len||10;
+const setup=()=>{A.innerHTML=`<div class="fade"><h2>📚 Study Escape</h2><p>Step away on purpose. Choose how long.</p><div class="row" role="group" aria-label="Break length">${[5,10,15].map(m=>`<button class="chip" aria-pressed="${m==len}" onclick="S.len=${m};save();V.study()">${m} min</button>`).join('')}</div><p></p><button class="btn" id="go">Start break</button></div>`;$('#go').onclick=run};
+const run=()=>{const end=Date.now()+len*60000;const cards=['Roll your shoulders back three times.','Look at something far away for 20 seconds.','Drink a few sips of water.','Name one thing you already understand about today’s topic.'];
+A.innerHTML=`<div class="fade"><h2>Break time</h2><div class="big" id="t">${mm(len*60)}</div><p>Tap each reset when you’ve done it. Skip any you like.</p>${cards.map(c=>`<button class="flip" aria-pressed="false" onclick="this.setAttribute('aria-pressed',this.getAttribute('aria-pressed')!='true')">${c}</button>`).join('')}<div class="row"><button class="btn" id="rd">I’m ready to study</button><button class="btn alt" id="ex">Skip break</button></div></div>`;
+const tk=()=>{const s=Math.max(0,Math.round((end-Date.now())/1000));$('#t').textContent=mm(s);if(!s){clearInterval(i);$('#t').textContent='Time’s up';try{navigator.vibrate&&navigator.vibrate(200)}catch(e){}}};const i=setInterval(tk,500);timers.push(i);
+$('#rd').onclick=()=>{S.breaks++;save();clr();A.innerHTML=`<div class="fade"><h2>Back to it 🌿</h2><p class="ok">Break complete.</p><p>Start with one small task. Ten focused minutes is a good beginning.</p><button class="btn" onclick="go('')">Done</button></div>`};$('#ex').onclick=()=>go('')};
+setup()};
+/* GARDEN */
+const plantSvg=g=>{const h=28+g*26,leaves=Array.from({length:g},(_,i)=>{const y=h-8-i*22,s=i%2?1:-1;return `<ellipse cx="${48+s*13}" cy="${150-y}" rx="13" ry="6" fill="${i%2?'#5fae73':'#7fc293'}" transform="rotate(${s*-28} ${48+s*13} ${150-y})"/>`}).join('');
+return `<svg width="96" height="${160}" viewBox="0 0 96 160" aria-hidden="true"><path d="M48 150 Q44 ${150-h/2} 48 ${150-h}" stroke="#3f8a58" stroke-width="5" fill="none" stroke-linecap="round"/>${leaves}${g>=5?`<circle cx="48" cy="${150-h-6}" r="9" fill="#f2c879"/>`:`<circle cx="48" cy="${150-h-3}" r="5" fill="#9bd6a8"/>`}<ellipse cx="48" cy="152" rx="20" ry="6" fill="#6b5a45"/></svg>`};
+V.garden=()=>{const draw=()=>{A.innerHTML=`<div class="fade"><h2>🌱 Thought Garden</h2><p>Write a worry in a few words. Naming it is enough. Water it to help it grow, or let it go when you’re ready.</p>
+<div class="row"><input type="text" id="w" maxlength="40" placeholder="e.g. Tomorrow’s exam" aria-label="Your worry"><button class="btn" id="pl">Plant it</button></div><p></p>
+<div class="scene"><div class="garden">${S.garden.length?S.garden.map(p=>`<div class="plant">${plantSvg(p.g)}<small>${esc(p.t)}</small><div class="row" style="justify-content:center;gap:4px;margin-top:4px"><button class="btn sm" aria-label="Water ${esc(p.t)}" onclick="wat(${p.id})">💧</button><button class="btn alt sm" aria-label="Let go of ${esc(p.t)}" onclick="lg(${p.id})">🍃</button></div></div>`).join(''):'<p style="padding:90px 12px 0;color:var(--ink)">Your garden is empty. Plant the first thought.</p>'}</div></div><p class="stats">Plants grow with each watering. Letting go removes the thought from this device.</p></div>`;
+const add=()=>{const v=$('#w').value.trim();if(!v)return;S.garden.push({id:Date.now(),t:v,g:1});S.planted++;save();draw()};$('#pl').onclick=add;$('#w').onkeydown=e=>{if(e.key==='Enter')add()}};
+window.wat=id=>{const p=S.garden.find(x=>x.id==id);if(p&&p.g<5){p.g++;save();draw()}};window.lg=id=>{S.garden=S.garden.filter(x=>x.id!=id);save();draw()};draw()};
+/* BREATHING */
+V.breathe=()=>{const P={'Calm 4-6':[['Breathe in',4],['Breathe out',6]],'Box 4-4-4-4':[['Breathe in',4],['Hold',4],['Breathe out',4],['Hold',4]],'Sleep 4-7-8':[['Breathe in',4],['Hold',7],['Breathe out',8]]};let k=S.pat||'Calm 4-6',on=false;
+A.innerHTML=`<div class="fade"><h2>🌬️ Breathing World</h2><p>Follow the orb. Breathe at a pace that feels comfortable, and stop any time.</p><div class="row" id="pt">${Object.keys(P).map(n=>`<button class="chip" aria-pressed="${n==k}" data-n="${n}">${n}</button>`).join('')}</div>
+<div class="orbwrap"><div class="orb" id="o">Ready</div></div><p id="c" class="stats" style="text-align:center">Rounds this session: 0</p><div class="row" style="justify-content:center"><button class="btn" id="st">Start</button></div></div>`;
+$('#pt').onclick=e=>{const n=e.target.dataset.n;if(!n||on)return;k=n;S.pat=n;save();document.querySelectorAll('#pt .chip').forEach(b=>b.setAttribute('aria-pressed',b.dataset.n==n))};
+let rounds=0;const o=$('#o');
+const step=(i=0)=>{if(!on)return;const[l,s]=P[k][i%P[k].length];o.textContent=l;o.style.transitionDuration=s+'s';if(/in/.test(l))o.style.transform=reduce()?'scale(1.6)':'scale(2.3)';else if(/out/.test(l))o.style.transform='scale(1)';
+if(i%P[k].length===P[k].length-1){rounds++;S.breaths++;save();$('#c').textContent='Rounds this session: '+rounds}
+timers.push(setTimeout(()=>step(i+1),s*1000))};
+$('#st').onclick=()=>{on=!on;$('#st').textContent=on?'Stop':'Start';$('#st').className=on?'btn alt':'btn';if(on)step();else{clr();o.style.transform='scale(1)';o.textContent='Ready'}}};
+/* ISLAND */
+const EM={Anxious:['Count five things you can see, four you can touch, three you can hear.','Write the worry, then one thing you can do about it today.','Send a short message to someone you trust.','Wrap up in something soft and take ten slow breaths.'],Sad:['Walk slowly, even for two minutes, and notice the air.','Listen to one song that matches how you feel.','Tell someone, “Today’s a heavy day for me.”','Make a warm drink and let it be a quiet moment.'],Angry:['Press your palms together hard for ten seconds, then release.','Scribble the anger onto paper, then tear it up.','Pause before replying. Draft it, don’t send it.','Sit somewhere cool and let your shoulders drop.'],Tired:['Stretch your arms overhead and yawn on purpose.','Rest your eyes for two minutes, no screen.','Pick one thing to postpone until tomorrow.','Dim the lights and lie down for ten minutes.'],Overwhelmed:['Stand up, feel your feet on the floor, breathe out slowly.','List everything in your head, then circle just one item.','Ask for help with one thing, however small.','Put the list away. Do nothing for five minutes.']};
+const LOC=[['Shore',90,215,'#f2c879','🐚'],['Forest',175,130,'#4f9a6a','🌲'],['Lighthouse',300,95,'#e58b7b','🗼'],['Cabin',360,215,'#9a86d6','🏠']];
+V.island=()=>{A.innerHTML=`<div class="fade"><h2>🏝️ Emotion Island</h2><p>How are you feeling right now?</p><div class="row" id="em">${Object.keys(EM).map(e=>`<button class="chip" aria-pressed="false" data-e="${e}">${e}</button>`).join('')}</div><p></p>
+<svg class="isle" viewBox="0 0 460 300" role="group" aria-label="Island with four places to visit"><rect width="460" height="300" rx="26" fill="#6fc3d6"/><ellipse cx="230" cy="235" rx="205" ry="52" fill="#f0dca4"/><path d="M40 225 Q120 90 230 120 Q340 60 425 225 Q230 285 40 225Z" fill="#7fc293"/><path d="M60 235 Q230 290 400 235" stroke="#fff" stroke-width="3" fill="none" opacity=".6"/>
+${LOC.map((l,i)=>`<g class="spot" tabindex="0" role="button" aria-label="Visit the ${l[0]}" data-i="${i}"><circle cx="${l[1]}" cy="${l[2]}" r="30" fill="${l[3]}" stroke="#fff" stroke-width="3"/><text x="${l[1]}" y="${l[2]+9}" font-size="26" text-anchor="middle">${l[4]}</text><text x="${l[1]}" y="${l[2]+50}" font-size="13" font-weight="700" text-anchor="middle" fill="#1d2b2a">${l[0]}</text></g>`).join('')}</svg>
+<div class="card" id="ans" style="margin-top:14px"><p>Choose a feeling, then tap a place on the island.</p></div></div>`;
+let em=null;$('#em').onclick=e=>{const n=e.target.dataset.e;if(!n)return;em=n;document.querySelectorAll('#em .chip').forEach(b=>b.setAttribute('aria-pressed',b.dataset.e==n));$('#ans').innerHTML=`<p>Feeling ${n.toLowerCase()} is okay. Tap a place to get a small idea.</p>`};
+const vis=i=>{if(!em){$('#ans').innerHTML='<p>Pick a feeling first.</p>';return}$('#ans').innerHTML=`<h3>${LOC[i][4]} ${LOC[i][0]}</h3><p>${EM[em][i]}</p><p class="stats">Not for you right now? Try another place.</p>`};
+document.querySelectorAll('.spot').forEach(g=>{g.onclick=()=>vis(+g.dataset.i);g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();vis(+g.dataset.i)}}})};
+/* NIGHT */
+V.night=()=>{let len=S.nlen||10;
+A.innerHTML=`<div class="fade"><h2>🌙 Night Escape</h2><p>Dim your screen, put the day down, and let the night scene keep you company. Sound is ${S.sound?'on':'off'} (use the button at the top to change it).</p><div class="row" role="group" aria-label="Wind-down length">${[10,20,30].map(m=>`<button class="chip" aria-pressed="${m==len}" onclick="S.nlen=${m};save();V.night()">${m} min</button>`).join('')}</div><p></p><button class="btn" id="go">Begin wind-down</button></div>`;
+$('#go').onclick=()=>{const end=Date.now()+len*60000;const n=document.createElement('div');n.className='night';n.innerHTML=`<canvas id="cv"></canvas><h2 style="font-size:1.4rem">Let the day go.</h2><div class="big" id="nt" style="font-size:3rem">${mm(len*60)}</div><p id="np">Breathe slowly. There’s nothing to solve tonight.</p><button class="btn alt" id="nx">End</button>`;document.body.appendChild(n);startSnd();try{navigator.wakeLock&&navigator.wakeLock.request('screen').then(l=>{WL=l}).catch(()=>{})}catch(e){}
+const cv=$('#cv'),x=cv.getContext('2d');let W,H;const st=Array.from({length:110},()=>({x:Math.random(),y:Math.random()*.65,r:Math.random()*1.4+.4,p:Math.random()*6}));
+const draw=t=>{x.clearRect(0,0,W,H);st.forEach(s=>{x.globalAlpha=.4+.5*Math.sin(t/900+s.p);x.fillStyle='#fff';x.beginPath();x.arc(s.x*W,s.y*H,s.r,0,7);x.fill()});x.globalAlpha=1;
+const mx=W*.74,my=H*.2,mr=Math.min(W,H)*.07,g=x.createRadialGradient(mx,my,mr*.5,mx,my,mr*4);g.addColorStop(0,'#fff4c855');g.addColorStop(1,'#fff4c800');x.fillStyle=g;x.fillRect(0,0,W,H);x.fillStyle='#fff4d0';x.beginPath();x.arc(mx,my,mr,0,7);x.fill();x.fillStyle='#141a33';x.beginPath();x.arc(mx+mr*.4,my-mr*.15,mr*.85,0,7);x.fill();
+[['#1d2650',.72,.06],['#101838',.8,.09],['#0a1028',.88,.05]].forEach(([c,b,a],i)=>{x.fillStyle=c;x.beginPath();x.moveTo(0,H);for(let k=0;k<=W;k+=12)x.lineTo(k,H*b-Math.sin(k/(90+i*40)+i*2)*H*a*.5);x.lineTo(W,H);x.fill()})};
+const rs=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight;draw(0)};rs();addEventListener('resize',rs);
+if(!reduce()){const a=t=>{if(!$('#cv'))return;draw(t);requestAnimationFrame(a)};requestAnimationFrame(a)}
+const i=setInterval(()=>{const s=Math.max(0,Math.round((end-Date.now())/1000));$('#nt').textContent=mm(s);if(s===8)fadeSnd();if(!s){clearInterval(i);S.nights++;save();$('#np').textContent='Sleep well. You did enough today.';$('#nt').textContent='🌙'}},500);timers.push(i);
+$('#nx').onclick=()=>{if(!$('#nt').textContent.includes('🌙')&&!/Sleep well/.test($('#np').textContent)){}clr();go('')}}};
+try{const c=document.createElement('canvas');c.width=c.height=180;const x=c.getContext('2d');x.fillStyle='#141a33';x.fillRect(0,0,180,180);const g=x.createRadialGradient(70,65,8,90,90,60);g.addColorStop(0,'#bfe8c9');g.addColorStop(1,'#3f8a6e');x.fillStyle=g;x.beginPath();x.arc(90,92,58,0,7);x.fill();x.fillStyle='#f2c879';x.beginPath();x.arc(142,38,10,0,7);x.fill();const u=c.toDataURL('image/png');$('#ti').href=u;$('#fi').href=u}catch(e){}
+chrome();route();
+</script>
+</body>
+</html>
